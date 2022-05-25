@@ -49,13 +49,13 @@
                         version =
                           "${substr hp.ghc.version}-${substr old.version}";
                       }));
-                }) (hf: hp:
-                  {
-                    # generic-trie = disableLibraryProfiling (dontHaddock (dontCheck
-                    #   (doJailbreak (hf.callHackage "generic-trie" "0.3.1" { }))));
-                    # winery = disableLibraryProfiling (dontHaddock (dontCheck
-                    #   (doJailbreak (hf.callHackage "winery" "1.3.2" { }))));
-                  }) hf hp);
+                }) (hf: hp: {
+                  # generic-trie = disableLibraryProfiling (dontHaddock (dontCheck
+                  #   (doJailbreak (hf.callHackage "generic-trie" "0.3.1" { }))));
+                  fast-builder = disableLibraryProfiling (dontHaddock (dontCheck
+                    (doJailbreak
+                      (hf.callHackage "fast-builder" "0.1.3.0" { }))));
+                }) hf hp);
 
             # all haskellPackages
             allHaskellPackages = let
